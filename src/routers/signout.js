@@ -14,7 +14,10 @@ router.get('/signout', async function (req, res, next) {
     try {
       const accessToken = cookies.accessToken;
       const User = mongoose.model(userSchema.key, userSchema.schema);
-      const result = await User.deleteOne({ accessToken });
+      const result = await User.updateOne(
+        { accessToken },
+        { accessToken: null }
+      );
       if (result.n >= 1) {
         res
           .clearCookie('accessToken', {

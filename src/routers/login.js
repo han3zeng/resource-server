@@ -23,7 +23,11 @@ router.get('/login', async function (req, res, next) {
         path: '/',
         expires: expireDate()
       })
-      .json(user);
+      .json({
+        name: user.name,
+        email: user.email,
+        avatarURL: user.avatarURL
+      });
   } catch (e) {
     next(e);
   }
