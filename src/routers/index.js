@@ -1,9 +1,9 @@
 const oauthRouter = require('./oauth');
-const loginRouter = require('./login');
+const signInRouter = require('./sign-in');
 const signoutRouter = require('./signout');
 
 module.exports = {
   oauthRouter,
-  loginRouter,
+  signInRouter,
   signoutRouter
 };
