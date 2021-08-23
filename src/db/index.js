@@ -7,9 +7,11 @@ const connectOptions = {
   useNewUrlParser: true
 };
 
+const { MONGO_URI } = JSON.parse(process.env.secrets)
+
 function connect () {
   return new Promise((resolve, reject) => {
-    mongoose.connect(process.env.MONGO_URI, connectOptions, (err, db) => {
+    mongoose.connect(MONGO_URI, connectOptions, (err, db) => {
       if (err) {
         console.log('have problem connecting to mongoDb: ', err);
         reject(err);

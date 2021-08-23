@@ -4,6 +4,8 @@ const { userSchema } = require('../db/schemas');
 const mongoose = require('mongoose');
 const config = require('../config');
 
+const { domain } = config;
+
 router.get('/signout', async function (req, res, next) {
   const cookies = req.cookies;
   if (!cookies) {
@@ -21,7 +23,7 @@ router.get('/signout', async function (req, res, next) {
       if (result.n >= 1) {
         res
           .clearCookie('accessToken', {
-            domain: 'localhost',
+            domain: domain,
             httpOnly: true,
             sameSite: config.nodeEnv === 'production' ? 'none' : 'lax',
             secure: config.nodeEnv === 'production',
