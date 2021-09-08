@@ -3,6 +3,7 @@ const router = express.Router();
 const { userSchema } = require('../db/schemas');
 const mongoose = require('mongoose');
 const config = require('../config');
+const { csrfProtection } = require('../middlewares');
 
 const { domain } = config;
 
@@ -11,7 +12,7 @@ const expireDate = () => {
   return new Date(new Date().getTime() + timeInterval);
 };
 
-router.get('/sign-in', async function (req, res, next) {
+router.post('/sign-in', csrfProtection, async function (req, res, next) {
   try {
     const accessToken = req.get('Authorization').split(' ')[1];
     const User = mongoose.model(userSchema.key, userSchema.schema);
@@ -45,14 +46,6 @@ router.get('/sign-in', async function (req, res, next) {
         });
     }
   } catch (e) {
-    next(e);
-  }
-});
-
-router.get('/sign-in/password', async function (req, res, next) {
-  try {
-
-  } catch(e) {
     next(e);
   }
 });

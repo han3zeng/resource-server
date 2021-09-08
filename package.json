@@ -27,6 +27,7 @@
   "homepage": "https://github.com/han3zeng/oauth-server#readme",
   "dependencies": {
     "cookie-parser": "^1.4.5",
+    "csurf": "^1.11.0",
     "dotenv": "^10.0.0",
     "express": "^5.0.0-alpha.8",
     "mongoose": "^5.13.3",
