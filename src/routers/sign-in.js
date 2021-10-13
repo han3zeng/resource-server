@@ -34,7 +34,8 @@ router.post('/sign-in', csrfProtection, async function (req, res, next) {
           data: {
             name: user.name,
             email: user.email,
-            avatarURL: user.avatarURL
+            avatarURL: user.avatarURL,
+            sub: user.sub
           }
         });
     } else {

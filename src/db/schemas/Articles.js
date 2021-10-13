@@ -2,11 +2,10 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const schema = new Schema({
-  accessToken: String,
-  email: String,
-  name: String,
-  avatarURL: String,
-  sub: String
+  sub: String,
+  articleId: String,
+  content: String,
+  title: String
 }, {
   timestamps: {
     currentTime: () => {
@@ -17,6 +16,6 @@ const schema = new Schema({
 });
 
 module.exports = {
-  key: 'User',
+  key: 'Articles',
   schema: schema
 };
