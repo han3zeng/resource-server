@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const schema = new Schema({
   sub: String,
-  articleId: String,
+  storyId: String,
   content: String,
   title: String
 }, {
@@ -16,6 +16,6 @@ const schema = new Schema({
 });
 
 module.exports = {
-  key: 'Articles',
+  key: 'Stories',
   schema: schema
 };

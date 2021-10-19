@@ -1,9 +1,9 @@
 const userSchema = require('./User');
-const userArticlesSchema = require('./UserArticles');
-const articlesSchema = require('./Articles');
+const userStoriesSchema = require('./UserStories');
+const storiesSchema = require('./Stories');
 
 module.exports = {
   userSchema,
-  userArticlesSchema,
-  articlesSchema
+  userStoriesSchema,
+  storiesSchema
 };

@@ -3,7 +3,10 @@ const { Schema } = mongoose;
 
 const schema = new Schema({
   userId: String,
-  articles: [String]
+  stories: [{
+    storyId: String,
+    title: String
+  }]
 }, {
   timestamps: {
     currentTime: () => {
@@ -14,6 +17,6 @@ const schema = new Schema({
 });
 
 module.exports = {
-  key: 'UserArticles',
+  key: 'UserStories',
   schema: schema
 };

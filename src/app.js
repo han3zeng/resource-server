@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const { signInRouter, signoutRouter, testRouter, articleRouter } = require('./routers');
+const { signInRouter, signoutRouter, testRouter, storyRouter } = require('./routers');
 const { cors, csrfProtection } = require('./middlewares');
 const cookieParser = require('cookie-parser');
 
@@ -15,7 +15,7 @@ app.get('/initialization', csrfProtection, function (req, res) {
 });
 app.use('/user', signInRouter);
 app.use('/user', signoutRouter);
-app.use('/article', articleRouter);
+app.use('/story', storyRouter);
 app.use('/test', testRouter);
 
 module.exports = app;
