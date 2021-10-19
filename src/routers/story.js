@@ -10,12 +10,12 @@ const { csrfProtection } = require('../middlewares');
 const shortid = require('shortid');
 
 const insertUserArticle = async ({
-  sub,
+  userId,
   storyId,
   title
 }) => {
   const UserStories = mongoose.model(userStoriesSchema.key, userStoriesSchema.schema);
-  const userStories = await UserStories.findOne({ userId: sub });
+  const userStories = await UserStories.findOne({ userId });
   let res = null;
   if (userStories) {
     const update = {
@@ -23,13 +23,13 @@ const insertUserArticle = async ({
     };
     res = await UserStories.updateOne(
       {
-        userId: sub
+        userId
       },
       update
     );
   } else {
     res = await UserStories.create({
-      userId: sub,
+      userId,
       stories: [{
         storyId,
         title
@@ -49,12 +49,12 @@ const checkIfUserExist = async ({
     const user = await User.findOne({ accessToken });
     return {
       ok: true,
-      user
+      sub: user.sub
     };
   } catch (e) {
     return {
       ok: false,
-      user: null,
+      sub: null,
       error: e
     };
   }
@@ -62,7 +62,7 @@ const checkIfUserExist = async ({
 
 const insertArticle = async ({
   storyId,
-  sub,
+  userId,
   content,
   title
 }) => {
@@ -73,7 +73,7 @@ const insertArticle = async ({
     res = await Stories.updateOne(
       {
         storyId,
-        sub
+        userId
       },
       {
         content,
@@ -83,7 +83,7 @@ const insertArticle = async ({
   } else {
     res = await Stories.create({
       storyId,
-      sub,
+      userId,
       content,
       title
     });
@@ -93,10 +93,9 @@ const insertArticle = async ({
 
 router.post('/create', csrfProtection, async function (req, res, next) {
   try {
-    const { user } = await checkIfUserExist({ req });
-    if (user) {
+    const { sub } = await checkIfUserExist({ req });
+    if (sub) {
       const {
-        sub,
         content,
         title
       } = req?.body;
@@ -108,7 +107,7 @@ router.post('/create', csrfProtection, async function (req, res, next) {
       });
       insertArticle({
         storyId: shortId,
-        sub: sub,
+        userId: sub,
         content,
         title
       });
@@ -133,11 +132,8 @@ router.post('/create', csrfProtection, async function (req, res, next) {
 
 router.post('/get-all/', csrfProtection, async function (req, res, next) {
   try {
-    const { user } = await checkIfUserExist({ req });
-    if (user) {
-      const {
-        sub
-      } = req?.body;
+    const { sub } = await checkIfUserExist({ req });
+    if (sub) {
       const UserStories = mongoose.model(userStoriesSchema.key, userStoriesSchema.schema);
       const userStories = await UserStories.findOne({ userId: sub });
       if (userStories) {

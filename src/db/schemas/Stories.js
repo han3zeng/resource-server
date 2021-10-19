@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const schema = new Schema({
-  sub: String,
+  userId: String,
   storyId: String,
   content: String,
   title: String
