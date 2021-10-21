@@ -4,13 +4,9 @@ const { userSchema } = require('../db/schemas');
 const mongoose = require('mongoose');
 const config = require('../config');
 const { csrfProtection } = require('../middlewares');
+const { expireDate } = require('../utils');
 
 const { domain } = config;
-
-const expireDate = () => {
-  const timeInterval = 6 * 30 * 24 * 60 * 60 * 1000;
-  return new Date(new Date().getTime() + timeInterval);
-};
 
 router.post('/sign-in', csrfProtection, async function (req, res, next) {
   try {
