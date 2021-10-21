@@ -130,7 +130,7 @@ router.post('/create', csrfProtection, async function (req, res, next) {
   }
 });
 
-router.post('/get-all/', csrfProtection, async function (req, res, next) {
+router.post('/get-all', csrfProtection, async function (req, res, next) {
   try {
     const { sub } = await checkIfUserExist({ req });
     if (sub) {
@@ -159,6 +159,44 @@ router.post('/get-all/', csrfProtection, async function (req, res, next) {
         .json({
           ok: false,
           message: 'user do not exist'
+        });
+    }
+  } catch (e) {
+    next(e);
+  }
+});
+
+router.post('/get-one', csrfProtection, async function (req, res, next) {
+  try {
+    const { sub } = await checkIfUserExist({ req });
+    if (!sub) {
+      res
+        .status(200)
+        .json({
+          ok: false,
+          message: 'user do not exist'
+        });
+    }
+    const {
+      storyId
+    } = req?.body;
+    const Stories = mongoose.model(storiesSchema.key, storiesSchema.schema);
+    const story = await Stories.findOne({ storyId });
+    if (story) {
+      res
+        .status(200)
+        .json({
+          ok: true,
+          story,
+          message: 'Fetch the story successfully'
+        });
+    } else {
+      res
+        .status(200)
+        .json({
+          ok: false,
+          story,
+          message: 'The story do not exist.'
         });
     }
   } catch (e) {
