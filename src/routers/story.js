@@ -44,6 +44,13 @@ const checkIfUserExist = async ({
   req
 }) => {
   const { accessToken } = req.cookies;
+  if (!accessToken) {
+    return {
+      ok: false,
+      sub: null,
+      error: null
+    };
+  }
   const User = mongoose.model(userSchema.key, userSchema.schema);
   try {
     const user = await User.findOne({ accessToken });
