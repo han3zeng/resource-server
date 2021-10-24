@@ -39,7 +39,7 @@ router.post('/sign-in', csrfProtection, async function (req, res, next) {
         .status(200)
         .json({
           ok: false,
-          messag: 'the access token has no associtaed user'
+          message: 'the access token has no associtaed user'
         });
     }
   } catch (e) {
