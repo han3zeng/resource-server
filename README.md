@@ -1,7 +1,7 @@
 # resource-server
 
 ## Response
-* This is the overview of the implemented http response. Please check wiki for detailed information for each router.
+* This is the overview of the implemented http response. Please check this [postman documentation](https://documenter.getpostman.com/view/18060759/UV5c8Zwt#intro) for detailed information.
 
 #### Successfully Responses
 * 200 (OK)
