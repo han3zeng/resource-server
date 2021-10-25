@@ -1,11 +1,9 @@
-const signInRouter = require('./sign-in');
-const signoutRouter = require('./signout');
+const authenticationRouter = require('./authentication');
 const storyRouter = require('./story');
 const testRouter = require('./test');
 
 module.exports = {
-  signInRouter,
-  signoutRouter,
+  authenticationRouter,
   storyRouter,
   testRouter
 };

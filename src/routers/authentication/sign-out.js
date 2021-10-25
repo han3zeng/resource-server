@@ -1,20 +1,15 @@
-const express = require('express');
-const router = express.Router();
-const { userSchema } = require('../db/schemas');
+const { userSchema } = require('../../db/schemas');
 const mongoose = require('mongoose');
-const config = require('../config');
+const config = require('../../config');
 
 const { domain } = config;
 
-router.get('/signout', async function (req, res, next) {
-  const cookies = req.cookies;
-  if (!cookies) {
-    res.status(401).json({
-      message: 'Unauthorized Request'
-    });
-  } else {
+const signOutComposer = ({
+  router
+}) => {
+  router.get('/sign-out', async function (req, res, next) {
     try {
-      const accessToken = cookies.accessToken;
+      const { accessToken } = res.locals;
       const User = mongoose.model(userSchema.key, userSchema.schema);
       const result = await User.updateOne(
         { accessToken },
@@ -41,7 +36,7 @@ router.get('/signout', async function (req, res, next) {
     } catch (e) {
       next(e);
     }
-  }
-});
+  });
+};
 
-module.exports = router;
+module.exports = signOutComposer;
