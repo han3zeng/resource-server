@@ -30,6 +30,9 @@
     "csurf": "^1.11.0",
     "dotenv": "^10.0.0",
     "express": "^5.0.0-alpha.8",
+    "express-graphql": "^0.12.0",
+    "graphql": "^15.6.1",
+    "graphql-tools": "^8.2.0",
     "mongoose": "^5.13.3",
     "node-fetch": "^2.6.1",
     "shortid": "^2.2.16"
