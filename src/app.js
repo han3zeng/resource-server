@@ -9,8 +9,9 @@ const { cors, csrfProtection, errorHandler, accessTokenCheck } = require('./midd
 const cookieParser = require('cookie-parser');
 const { graphqlHTTP } = require('express-graphql');
 const { makeExecutableSchema } = require('graphql-tools');
-const typeDefs = require('./typeDefs');
-const resolvers = require('./resolvers');
+const typeDefs = require('./graph-q-l/type-defs');
+const resolvers = require('./graph-q-l/resolvers');
+const config = require('./config');
 
 const schema = makeExecutableSchema({
   typeDefs,
@@ -35,7 +36,7 @@ app.use('/story', storyRouter);
 app.use('/graphql', (req, res, next) => {
   return graphqlHTTP({
     schema: schema,
-    graphiql: true,
+    graphiql: config.nodeEnv !== 'production',
     context: { req, res, next }
   })(req, res, next);
 });

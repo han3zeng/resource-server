@@ -1,6 +1,6 @@
 const {
   userStoriesSchema
-} = require('../db/schemas');
+} = require('../../db/schemas');
 const mongoose = require('mongoose');
 
 async function getStories (root, args, context, info) {

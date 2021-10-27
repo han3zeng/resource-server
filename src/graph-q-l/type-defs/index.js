@@ -1,9 +1,23 @@
 const typeDefs = `
+type leaf {
+  text: String!
+  italic: Boolean,
+  bold: Boolean,
+}
+
+union Children = leaf | storyNode
+
+type storyNode {
+  type: String!,
+  url: String,
+  children: [Children]
+}
+
 type story {
   id: ID!
   userId: String,
   storyId: String,
-  content: String,
+  content: [storyNode],
   title: String
 }
 
@@ -12,14 +26,15 @@ type storyAbstract {
   title: String
 }
 
-type userStoryMap {
+type userStories {
   id: ID!
   userId: String,
   stories: [storyAbstract]
 }
 
 type Query {
-  getStories: userStoryMap
+  getStories: userStories
+  getStory(storyId: String!): story
 }
 
 schema {
