@@ -25,13 +25,13 @@ async function getStory (root, args, context, info) {
   try {
     const Stories = mongoose.model(storiesSchema.key, storiesSchema.schema);
     const story = await Stories.findOne({ storyId });
-    const {
-      _id: id,
-      content,
-      userId,
-      title
-    } = story;
     if (story) {
+      const {
+        _id: id,
+        content,
+        userId,
+        title
+      } = story;
       return storyConstructor({
         id,
         content,
@@ -40,7 +40,7 @@ async function getStory (root, args, context, info) {
         title
       });
     } else {
-      return storyConstructor();
+      return storyConstructor({});
     }
   } catch (e) {
     next(e);

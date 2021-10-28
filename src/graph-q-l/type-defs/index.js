@@ -1,45 +1,35 @@
-const typeDefs = `
-type leaf {
-  text: String!
-  italic: Boolean,
-  bold: Boolean,
-}
+const getStories = require('./getStories');
+const getStory = require('./getStory');
+const createStory = require('./createStory');
+const base = `
+  type Query {
+    getStories: userStories
+    getStory(storyId: String!): story
+  }
 
-union Children = leaf | storyNode
+  type Mutation {
+    createStory(content: String, title: String): createStoryResult
+  }
 
-type storyNode {
-  type: String!,
-  url: String,
-  children: [Children]
-}
-
-type story {
-  id: ID!
-  userId: String,
-  storyId: String,
-  content: [storyNode],
-  title: String
-}
-
-type storyAbstract {
-  storyId: String,
-  title: String
-}
-
-type userStories {
-  id: ID!
-  userId: String,
-  stories: [storyAbstract]
-}
-
-type Query {
-  getStories: userStories
-  getStory(storyId: String!): story
-}
-
-schema {
-  query: Query
-}
+  schema {
+    query: Query
+    mutation: Mutation
+  }
 `;
 
-module.exports = typeDefs;
+const data = [
+  createStory,
+  getStories,
+  getStory,
+  base
+];
+
+const concat = ({
+  data
+}) => {
+  return data.reduce((acc, element) => {
+    return acc + element;
+  }, '');
+};
+
+module.exports = concat({ data });

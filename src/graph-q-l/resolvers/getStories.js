@@ -9,8 +9,8 @@ async function getStories (root, args, context, info) {
     const { sub } = res?.locals?.user;
     const UserStories = mongoose.model(userStoriesSchema.key, userStoriesSchema.schema);
     const userStories = await UserStories.findOne({ userId: sub });
-    const { userId, stories, _id: id } = userStories;
     if (userStories) {
+      const { userId, stories, _id: id } = userStories;
       return {
         id,
         userId,

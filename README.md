@@ -1,5 +1,19 @@
 # resource-server
 
+## Note
+* authentication
+    * restful API
+
+* service
+    * graphQL
+
+* reason
+    * I envision that only service related API will grow rapidly in the future. Therefore, only service related API may be benefited from the features of GraphQL
+        * flexibility
+            * design in data not view
+        * efficiency
+            * prevent from under / over fetching
+
 ## Response
 * This is the overview of the implemented http response. Please check this [postman documentation](https://documenter.getpostman.com/view/18060759/UV5c8Zwt#intro) for detailed information.
 

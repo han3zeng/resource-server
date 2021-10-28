@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 const schema = new Schema({
   userId: String,
   storyId: String,
-  content: [],
+  content: String,
   title: String
 }, {
   timestamps: {
