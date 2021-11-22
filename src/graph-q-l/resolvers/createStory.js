@@ -86,7 +86,8 @@ async function createStory (root, args, context, info) {
     });
     return {
       ok: true,
-      storyId: shortId
+      storyId: shortId,
+      message: 'create story successfully'
     };
   } catch (e) {
     next(e);
