@@ -1,6 +1,8 @@
 const getStories = require('./getStories');
 const getStory = require('./getStory');
 const createStory = require('./createStory');
+const deleteStory = require('./deleteStory');
+
 const base = `
   type Query {
     getStories: userStories
@@ -9,6 +11,7 @@ const base = `
 
   type Mutation {
     createStory(content: String, title: String): createStoryResult
+    deleteStory(storyId: String): deleteStoryResult
   }
 
   schema {
@@ -19,6 +22,7 @@ const base = `
 
 const data = [
   createStory,
+  deleteStory,
   getStories,
   getStory,
   base

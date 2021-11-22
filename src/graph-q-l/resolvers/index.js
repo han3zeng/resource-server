@@ -1,6 +1,7 @@
 const getStories = require('./getStories');
 const getStory = require('./getStory');
 const createStory = require('./createStory');
+const deleteStory = require('./deleteStory');
 
 const resolvers = {
   Query: {
@@ -8,7 +9,8 @@ const resolvers = {
     getStory
   },
   Mutation: {
-    createStory
+    createStory,
+    deleteStory
   }
 };
 
