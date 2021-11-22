@@ -73,12 +73,12 @@ async function createStory (root, args, context, info) {
   try {
     const { sub } = res.locals.user;
     const shortId = shortid.generate();
-    insertUserArticle({
+    await insertUserArticle({
       userId: sub,
       storyId: shortId,
       title
     });
-    insertArticle({
+    await insertArticle({
       storyId: shortId,
       userId: sub,
       content,
