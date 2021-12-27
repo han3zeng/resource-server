@@ -35,7 +35,7 @@ const signInComposer = ({
       .cookie('accessToken', accessToken, {
         domain,
         httpOnly: true,
-        sameSite: config.nodeEnv === 'production' ? 'none' : 'lax',
+        sameSite: 'lax',
         secure: config.nodeEnv === 'production',
         path: '/',
         expires: expireDate()
@@ -43,7 +43,7 @@ const signInComposer = ({
       .cookie('user-profile', userProfile, {
         clientDomain,
         httpOnly: false,
-        sameSite: config.nodeEnv === 'production' ? 'strict' : 'lax',
+        sameSite: 'lax',
         secure: config.nodeEnv === 'production',
         path: '/',
         expires: expireDate(),
