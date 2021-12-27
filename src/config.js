@@ -6,5 +6,6 @@ module.exports = Object.freeze({
     'https://authorization-server-7kgn6zbeya-uc.a.run.app',
     'https://react-playground-7kgn6zbeya-uc.a.run.app'
   ],
-  domain: process.env.NODE_ENV === 'production' ? 'resource-server-7kgn6zbeya-uc.a.run.app' : 'localhost'
+  domain: process.env.NODE_ENV === 'production' ? 'resource-server-7kgn6zbeya-uc.a.run.app' : 'localhost',
+  clientDomain: process.env.NODE_ENV === 'production' ? 'react-playground-7kgn6zbeya-uc.a.run.app' : 'localhost'
 });

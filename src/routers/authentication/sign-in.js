@@ -1,13 +1,13 @@
 const config = require('../../config');
-const { csrfProtection, accessTokenCheck } = require('../../middlewares');
 const { expireDate } = require('../../utils');
 
 const { domain } = config;
+const { clientDomain } = config;
 
 const signInComposer = ({
   router
 }) => {
-  router.post('/sign-in', csrfProtection, accessTokenCheck, async function (req, res, next) {
+  router.post('/sign-in', async function (req, res, next) {
     const { accessToken, user } = res.locals;
     if (!user.sub) {
       res
@@ -16,6 +16,20 @@ const signInComposer = ({
           message: 'Ther server do not generate valid user info for the token. (sub do not exist)'
         });
     }
+    const {
+      sub,
+      email,
+      name,
+      avatarURL,
+      authorizationServer
+    } = user;
+    const userProfile = JSON.stringify({
+      sub,
+      email,
+      name,
+      avatarURL,
+      authorizationServer
+    });
     res
       .status(200)
       .cookie('accessToken', accessToken, {
@@ -25,6 +39,15 @@ const signInComposer = ({
         secure: config.nodeEnv === 'production',
         path: '/',
         expires: expireDate()
+      })
+      .cookie('user-profile', userProfile, {
+        clientDomain,
+        httpOnly: false,
+        sameSite: config.nodeEnv === 'production' ? 'strict' : 'lax',
+        secure: config.nodeEnv === 'production',
+        path: '/',
+        expires: expireDate(),
+        encode: String
       })
       .json({
         ok: true,

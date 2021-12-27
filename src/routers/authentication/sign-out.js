@@ -17,13 +17,8 @@ const signOutComposer = ({
       );
       if (result.n >= 1) {
         res
-          .clearCookie('accessToken', {
-            domain: domain,
-            httpOnly: true,
-            sameSite: config.nodeEnv === 'production' ? 'none' : 'lax',
-            secure: config.nodeEnv === 'production',
-            path: '/'
-          })
+          .clearCookie('accessToken')
+          .clearCookie('user-profile')
           .status(200)
           .json({
             message: 'sign out successfully'

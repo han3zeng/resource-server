@@ -12,7 +12,7 @@
 // }
 
 function errorHandler (err, req, res, next) {
-  console.log('do error logging here');
+  console.log('err: ', err)
 }
 
 module.exports = errorHandler;

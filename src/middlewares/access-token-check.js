@@ -16,15 +16,16 @@ async function accessTokenCheck (req, res, next) {
     const accessToken = req?.get('Authorization')?.split(' ')[1] || req.cookies?.accessToken;
     if (!accessToken) {
       customizedResponse({ res });
-    }
-    const User = mongoose.model(userSchema.key, userSchema.schema);
-    const user = await User.findOne({ accessToken });
-    if (user) {
-      res.locals.accessToken = accessToken;
-      res.locals.user = user;
-      next();
     } else {
-      customizedResponse({ res });
+      const User = mongoose.model(userSchema.key, userSchema.schema);
+      const user = await User.findOne({ accessToken });
+      if (user) {
+        res.locals.accessToken = accessToken;
+        res.locals.user = user;
+        next();
+      } else {
+        customizedResponse({ res });
+      }
     }
   } catch (e) {
     next(e);
