@@ -8,7 +8,7 @@ const csrfProtection = csrf({
     domain,
     httpOnly: true,
     sameSite: 'none',
-    secure: config.nodeEnv === 'production',
+    secure: true,
     path: '/',
     expires: expireDate()
   }

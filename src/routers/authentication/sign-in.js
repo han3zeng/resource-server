@@ -2,7 +2,6 @@ const config = require('../../config');
 const { expireDate } = require('../../utils');
 
 const { domain } = config;
-const { clientDomain } = config;
 
 const signInComposer = ({
   router
@@ -23,40 +22,25 @@ const signInComposer = ({
       avatarURL,
       authorizationServer
     } = user;
-    const userProfile = JSON.stringify({
-      sub,
-      email,
-      name,
-      avatarURL,
-      authorizationServer
-    });
     res
       .status(200)
       .cookie('accessToken', accessToken, {
         domain,
         httpOnly: true,
         sameSite: 'none',
-        secure: config.nodeEnv === 'production',
+        secure: true,
         path: '/',
         expires: expireDate()
-      })
-      .cookie('user-profile', userProfile, {
-        clientDomain,
-        httpOnly: false,
-        sameSite: 'none',
-        secure: config.nodeEnv === 'production',
-        path: '/',
-        expires: expireDate(),
-        encode: String
       })
       .json({
         ok: true,
         message: 'find associated user',
         data: {
-          name: user.name,
-          email: user.email,
-          avatarURL: user.avatarURL,
-          sub: user.sub
+          sub,
+          email,
+          name,
+          avatarURL,
+          authorizationServer
         }
       });
   });

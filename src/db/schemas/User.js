@@ -6,7 +6,8 @@ const schema = new Schema({
   email: String,
   name: String,
   avatarURL: String,
-  sub: String
+  sub: String,
+  authorizationServer: String
 }, {
   timestamps: {
     currentTime: () => {
