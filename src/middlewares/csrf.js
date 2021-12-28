@@ -7,7 +7,7 @@ const csrfProtection = csrf({
   cookie: {
     domain,
     httpOnly: true,
-    sameSite: config.nodeEnv === 'production' ? 'none' : 'lax',
+    sameSite: 'none',
     secure: config.nodeEnv === 'production',
     path: '/',
     expires: expireDate()

@@ -37,7 +37,7 @@ async function initialization (req, res, next) {
           .cookie('user-profile', userProfile, {
             clientDomain,
             httpOnly: false,
-            sameSite: config.nodeEnv === 'production' ? 'strict' : 'lax',
+            sameSite: 'none',
             secure: config.nodeEnv === 'production',
             path: '/',
             expires: expireDate(),
